@@ -108,5 +108,20 @@ end
 
   end
 
+  def test_readme_examples
+    assert_output("SP\nSão Paulo\n01001-000\n") do
+      cep = CodigoPostal.new(1001000)
+      puts cep.state_code # => 'SP'
+      puts cep.state_name # => 'São Paulo'
+      puts cep.to_s # => '01001-000'
+    end
+
+    assert_output("true\n") do
+      cep1 = CodigoPostal.new(4094050)
+      cep2 = CodigoPostal.new("04.094-050")
+      puts cep1 == cep2 # => true
+    end
+  end
+
 end
 
