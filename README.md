@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/codigo_postal.svg)](https://badge.fury.io/rb/codigo_postal)
 # CodigoPostal
 Validate, format and get the corresponding Brazilian state for a CEP without making HTTP requests.
 
