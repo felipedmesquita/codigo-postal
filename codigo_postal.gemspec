@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "codigo_postal"
-  s.version       = "0.0.2"
+  s.version       = "0.0.3"
   s.authors       = ["Felipe Mesquita"]
   s.email         = "felipemesquita@hey.com"
   s.summary       = %q{An offline gem to find Brazilian states by postal code}
