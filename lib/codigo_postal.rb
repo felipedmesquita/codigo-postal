@@ -45,9 +45,9 @@ class CodigoPostal
   end
 
   def find_state_by_cep
-    cep_number = @cep_digits
+    @cep_digits
     CEP_RANGES.sort_by { |range| range[:range_end] }.each do |cep_range|
-      return cep_range if cep_number <= cep_range[:range_end]
+      return cep_range if @cep_digits <= cep_range[:range_end]
     end
     nil
   end
