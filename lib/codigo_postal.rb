@@ -34,7 +34,7 @@ class CodigoPostal
 
   attr_reader :state_code, :state_name, :cep_formatted, :cep_digits
   def initialize(cep)
-    cep_fields = match_cep cep.to_s
+    cep_fields = match_cep cep.to_s.strip
     if !cep_fields.nil?
       @cep_digits = "#{cep_fields[0]}#{cep_fields[1]}#{cep_fields[2]}".to_i
       @cep_formatted = "#{cep_fields[0].rjust(2, '0')}#{cep_fields[1]}-#{cep_fields[2]}"

@@ -123,5 +123,9 @@ end
     end
   end
 
+  def test_strip_whitspace
+    assert_equal CodigoPostal.new('  04.094-050  '), CodigoPostal.new('04.094-050')
+  end
+
 end
 
