@@ -36,7 +36,7 @@ class CodigoPostal
   def initialize(cep)
     cep_fields = match_cep cep.to_s.strip
     if !cep_fields.nil?
-      @cep_digits = "#{cep_fields[0]}#{cep_fields[1]}#{cep_fields[2]}".to_i
+      @cep_digits = "#{cep_fields[0].rjust(2, '0')}#{cep_fields[1]}#{cep_fields[2]}"
       @cep_formatted = "#{cep_fields[0].rjust(2, '0')}#{cep_fields[1]}-#{cep_fields[2]}"
       state = find_state_by_cep
       @state_code = state[:code]
@@ -47,7 +47,7 @@ class CodigoPostal
   def find_state_by_cep
     @cep_digits
     CEP_RANGES.sort_by { |range| range[:range_end] }.each do |cep_range|
-      return cep_range if @cep_digits <= cep_range[:range_end]
+      return cep_range if @cep_digits.to_i <= cep_range[:range_end]
     end
     nil
   end
