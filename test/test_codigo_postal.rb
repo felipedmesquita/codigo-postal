@@ -62,21 +62,21 @@ end
     rio_pardo = CodigoPostal.new('13.720-000')
     assert_equal 'SP', rio_pardo.state_code
     assert_equal '13720-000', rio_pardo.cep_formatted
-    assert_equal 13720000, rio_pardo.cep_digits
+    assert_equal '13720000', rio_pardo.cep_digits
   end
 
   def test_floripa
     floripa = CodigoPostal.new('88.063-500')
     assert_equal 'SC', floripa.state_code
     assert_equal '88063-500', floripa.cep_formatted
-    assert_equal 88063500, floripa.cep_digits
+    assert_equal '88063500', floripa.cep_digits
   end
 
   def test_catedral
     catedral = CodigoPostal.new(1001000)
     assert_equal 'SP', catedral.state_code
     assert_equal '01001-000', catedral.cep_formatted
-    assert_equal 1001000, catedral.cep_digits
+    assert_equal '01001000', catedral.cep_digits
   end
 
   def test_ibirapuera
