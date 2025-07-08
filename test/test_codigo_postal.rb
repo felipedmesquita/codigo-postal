@@ -52,7 +52,7 @@ class CodigoPostalTest < TLDR
     ]
 
     ceps.each do |cep, expected_code|
-      assert_equal expected_code, CodigoPostal.new(cep).state_code
+      assert_equal expected_code, CodigoPostal.new(cep).state_code, "state code for #{cep} expected to be #{expected_code}"
     end
   end
 
