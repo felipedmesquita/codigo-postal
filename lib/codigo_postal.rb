@@ -32,38 +32,53 @@ class CodigoPostal
     {range_end: 99999999, code: "RS", name: "Rio Grande do Sul"}
   ]
 
-  attr_reader :state_code, :state_name, :cep_formatted, :cep_digits
+  CEP_PATTERN = /
+    ^
+    \s*
+    (\d{1,2}) # leading zero can be ommited
+    \.?       # incorrect, but allowed as it's somewhat common
+    (\d{3})
+    -?
+    (\d{3})
+    \s*
+    $
+  /x
+
+  attr_reader :state_code, :state_name, :formatted, :digits
+
+  # for backwards compatibility
+  alias_method :cep_formatted, :formatted
+  alias_method :cep_digits, :digits
+
   def initialize(cep)
-    cep_fields = match_cep cep.to_s.strip
-    if !cep_fields.nil?
-      @cep_digits = "#{cep_fields[0].rjust(2, "0")}#{cep_fields[1]}#{cep_fields[2]}"
-      @cep_formatted = "#{cep_fields[0].rjust(2, "0")}#{cep_fields[1]}-#{cep_fields[2]}"
-      state = find_state_by_cep
-      @state_code = state[:code]
-      @state_name = state[:name]
-    end
-  end
+    components = cep.to_s.match CEP_PATTERN
+    return unless components
 
-  def find_state_by_cep
-    SORTED_RANGES.each do |cep_range|
-      return cep_range if @cep_digits.to_i <= cep_range[:range_end]
-    end
-    nil
-  end
+    @digits = components.captures.join
+    @digits.prepend "0" if @digits.length == 7
 
-  def match_cep(cep)
-    cep_regex = /^(\d{1,2})\.?(\d{3})-?(\d{3})$/
-    match_data = cep.match(cep_regex)
-    if match_data
-      match_data[1..3]
-    end
-  end
+    @formatted = @digits.dup.insert 5, "-"
 
-  def ==(other)
-    @cep_digits == other.cep_digits
+    state = lookup_state
+    @state_code = state[:code]
+    @state_name = state[:name]
   end
 
   def to_s
-    @cep_formatted
+    @formatted
+  end
+
+  def ==(other)
+    @digits == other.digits
+  end
+
+  def eql?(other)
+    self == other
+  end
+
+  def lookup_state
+    SORTED_RANGES.find do |range|
+      @digits.to_i <= range[:range_end]
+    end
   end
 end
