@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/codigo_postal.svg)](https://badge.fury.io/rb/codigo_postal)
 # CodigoPostal
-Validate, format and get the corresponding Brazilian state for a CEP without making HTTP requests.
+Validate, format, and get the corresponding Brazilian state for a given CEP without making network requests.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -15,13 +15,13 @@ $ bundle install
 ```
 
 ## Usage
-To use CodigoPostal, create a new instance of the CodigoPostal class with a valid Brazilian postal code:
 ```ruby
 cep = CodigoPostal.new(1001000)
 puts cep.state_code # => 'SP'
 puts cep.state_name # => 'São Paulo'
 puts cep.to_s # => '01001-000'
 ```
+
 You can also compare two `CodigoPostal` instances using the `==` operator:
 ```ruby
 cep1 = CodigoPostal.new(4094050)
