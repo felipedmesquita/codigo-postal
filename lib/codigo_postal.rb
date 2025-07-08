@@ -76,6 +76,8 @@ class CodigoPostal
     self == other
   end
 
+  private
+
   def lookup_state
     SORTED_RANGES.find do |range|
       @digits.to_i <= range[:range_end]
