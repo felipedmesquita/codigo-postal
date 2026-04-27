@@ -1,4 +1,4 @@
-require_relative "../lib/codigo_postal"
+require "codigo_postal"
 
 class CodigoPostalTest < TLDR
   def test_find_state_by_cep
